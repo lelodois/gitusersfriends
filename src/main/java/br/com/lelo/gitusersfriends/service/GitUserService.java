@@ -1,9 +1,9 @@
 package br.com.lelo.gitusersfriends.service;
 
 import br.com.lelo.gitusersfriends.kafka.producer.GitKafkaProducer;
-import br.com.lelo.gitusersfriends.domain.entity.GitUser;
-import br.com.lelo.gitusersfriends.repository.GitUserRepository;
-import br.com.lelo.gitusersfriends.domain.dto.KafkaTopicEnum;
+import br.com.lelo.gitusersfriends.domain.entity.GitUserEntity;
+import br.com.lelo.gitusersfriends.domain.dao.GitUserRepository;
+import br.com.lelo.gitusersfriends.kafka.comum.KafkaTopicEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +18,11 @@ public class GitUserService {
     @Autowired
     private GitKafkaProducer producer;
 
-    public GitUser start(String login) {
-        Optional<GitUser> gitUser = gitUserRepository.findByLogin(login);
+    public GitUserEntity start(String login) {
+        Optional<GitUserEntity> gitUser = gitUserRepository.findByLogin(login);
 
         if (gitUser.isPresent() == false) {
-            gitUser = Optional.of(gitUserRepository.save(new GitUser(login)));
+            gitUser = Optional.of(gitUserRepository.save(new GitUserEntity(login)));
         }
 
         producer.send(gitUser.get(), KafkaTopicEnum.values());

@@ -1,4 +1,4 @@
-package br.com.lelo.gitusersfriends.kafka;
+package br.com.lelo.gitusersfriends.kafka.comum;
 
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -24,8 +24,12 @@ public class KafkaProperties {
     public void inicializar() {
         properties = new Properties();
         properties.put("bootstrap.servers", servers);
+
         properties.put("key.serializer", StringSerializer.class.getCanonicalName());
         properties.put("key.deserializer", StringDeserializer.class.getCanonicalName());
+
+        properties.put("value.serializer", StringSerializer.class.getCanonicalName());
+        properties.put("value.deserializer", StringDeserializer.class.getCanonicalName());
     }
 
     public final KafkaConsumer<String, String> createConsumer(String topicName) {

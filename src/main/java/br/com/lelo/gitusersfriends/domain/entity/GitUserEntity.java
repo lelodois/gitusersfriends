@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class GitUser implements Serializable {
+public class GitUserEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -22,11 +22,11 @@ public class GitUser implements Serializable {
     @NotNull
     private Date lastUpdated;
 
-    public GitUser() {
+    public GitUserEntity() {
 
     }
 
-    public GitUser(String login) {
+    public GitUserEntity(String login) {
         this.login = login;
         this.lastUpdated = new Date();
     }

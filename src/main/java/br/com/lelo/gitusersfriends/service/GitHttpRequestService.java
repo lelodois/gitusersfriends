@@ -1,4 +1,4 @@
-package br.com.lelo.gitusersfriends.repository;
+package br.com.lelo.gitusersfriends.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.fluent.Request;
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GitRequestRepository {
+public class GitHttpRequestService {
 
     @Value("${myproperties.url.git.repository}")
     private String repoUrl;

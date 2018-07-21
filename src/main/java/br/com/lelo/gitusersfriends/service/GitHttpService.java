@@ -1,7 +1,8 @@
-package br.com.lelo.gitusersfriends.repository;
+package br.com.lelo.gitusersfriends.service;
 
-import br.com.lelo.gitusersfriends.domain.dto.Follower;
-import br.com.lelo.gitusersfriends.domain.dto.RepositoryStar;
+
+import br.com.lelo.gitusersfriends.dto.GitFollowerDto;
+import br.com.lelo.gitusersfriends.dto.GitRepoStarDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.client.fluent.Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class GitRepository {
+public class GitHttpService {
 
     @Autowired
-    private GitRequestRepository request;
+    private GitHttpRequestService request;
 
     @Autowired
     private ObjectMapper mapper;
@@ -29,20 +30,20 @@ public class GitRepository {
         );
     }
 
-    public List<RepositoryStar> findRepositoriesStar(String login, String repo) throws Exception {
+    public List<GitRepoStarDto> findRepositoriesStar(String login, String repo) throws Exception {
         return Arrays.asList(
                 mapper.readValue(
                         this.convert(request.findRepositoriesStar(login, repo)),
-                        RepositoryStar[].class
+                        GitRepoStarDto[].class
                 )
         );
     }
 
-    public List<Follower> findFollowers(String login) throws Exception {
+    public List<GitFollowerDto> findFollowers(String login) throws Exception {
         return Arrays.asList(
                 mapper.readValue(
                         this.convert(request.findFollowers(login)),
-                        Follower[].class
+                        GitFollowerDto[].class
                 )
         );
     }

@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-public class GitUserFriend implements Serializable {
+public class GitUserFriendEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -14,7 +14,7 @@ public class GitUserFriend implements Serializable {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
-    private GitUser user;
+    private GitUserEntity user;
 
     @NotNull
     private String friendLogin;
@@ -32,11 +32,11 @@ public class GitUserFriend implements Serializable {
         this.userFriendId = userFriendId;
     }
 
-    public GitUser getUser() {
+    public GitUserEntity getUser() {
         return user;
     }
 
-    public void setUser(GitUser user) {
+    public void setUser(GitUserEntity user) {
         this.user = user;
     }
 
