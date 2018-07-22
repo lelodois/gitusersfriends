@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("gitfriends/git")
 @Api(value = "Usuários git", description = "Extração de informações de usuários do git")
@@ -14,12 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class GitReposController {
 
     @Autowired
-    private LocalUserService business;
+    private LocalUserService service;
 
     @PutMapping(value = "friends")
-    public ResponseEntity<String> discovery(@RequestBody GitUserDto user) {
+    public ResponseEntity<String> discovery(
+            @RequestBody @Valid GitUserDto user) {
 
-        business.discovery(user.getLogin());
+        service.discovery(user.getLogin());
 
         return ResponseEntity.ok(user.getLogin());
     }

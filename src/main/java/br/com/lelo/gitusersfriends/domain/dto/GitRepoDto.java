@@ -11,6 +11,18 @@ public class GitRepoDto {
     private String stargazers_url;
     private boolean archived;
 
+    public GitRepoDto() {
+
+    }
+
+    public GitRepoDto(String name, Long id, Integer stargazers_count, String stargazers_url, boolean archived) {
+        this.name = name;
+        this.id = id;
+        this.stargazers_count = stargazers_count;
+        this.stargazers_url = stargazers_url;
+        this.archived = archived;
+    }
+
     public boolean validRepo() {
         return this.isArchived() == false
                 && this.getStargazers_count() > 0;

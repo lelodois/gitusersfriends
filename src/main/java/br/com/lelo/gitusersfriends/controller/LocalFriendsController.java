@@ -3,6 +3,7 @@ package br.com.lelo.gitusersfriends.controller;
 import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
 import br.com.lelo.gitusersfriends.service.LocalFriendService;
 import io.swagger.annotations.Api;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class LocalFriendsController {
 
     @GetMapping(value = "/{login}")
     public ResponseEntity<List<LocalFriendEntity>> get(
-            @PathVariable String login) {
+            @PathVariable @NotEmpty String login) {
 
         return ResponseEntity.ok(service.findTopFriends(login));
     }

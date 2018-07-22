@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 @RestController
 @RequestMapping("gitfriends/local/users")
 @Api(value = "Usuários locais", description = "Usuários extraídos do git")
@@ -17,7 +20,8 @@ public class LocalUsersController {
     private LocalUserService service;
 
     @GetMapping(value = "/{login}")
-    public ResponseEntity<LocalUserEntity> get(@PathVariable String login) {
+    public ResponseEntity<LocalUserEntity> get(
+            @PathVariable @Min(1) @NotNull String login) {
         return ResponseEntity.ok(service.findByLogin(login));
     }
 
