@@ -1,41 +1,34 @@
 package br.com.lelo.gitusersfriends.kafka.consumer;
 
-import br.com.lelo.gitusersfriends.kafka.comum.KafkaProperties;
 import br.com.lelo.gitusersfriends.kafka.comum.KafkaTopicEnum;
+import br.com.lelo.gitusersfriends.service.GitFollowersService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.UUID;
-
 @Component
-public class GitFollowersConsumer implements MyConsumer {
+public class GitFollowersConsumer extends GitConsumer {
 
     @Autowired
-    private KafkaProperties properties;
-
-    @PostConstruct
-    public void go() {
-        properties.getProperties().put("group.id", UUID.randomUUID().toString());
-        new Thread(this::run).start();
-    }
+    private GitFollowersService followersService;
 
     @Override
-    public String getTopicName() {
-        return KafkaTopicEnum.GIT_TOPIC_FOLLOWERS.name();
-    }
-
-    private void run() {
-        try (KafkaConsumer<String, String> kafkaConsumer =
-                     properties.createConsumer(this.getTopicName())) {
-
-            kafkaConsumer.seekToBeginning(kafkaConsumer.assignment());
-            while (true) {
-                for (ConsumerRecord<String, String> record : kafkaConsumer.poll(10)) {
-                }
+    @Scheduled(fixedDelay = 2000)
+    public void run() {
+        for (ConsumerRecord<String, String> record : super.poll()) {
+            try {
+                followersService.saveFollowers(record.value());
+            } catch (Exception e) {
+                e.printStackTrace();
+                super.sendError(record.value());
             }
         }
     }
+
+    @Override
+    public KafkaTopicEnum getTopic() {
+        return KafkaTopicEnum.GIT_TOPIC_FOLLOWERS;
+    }
+
 }

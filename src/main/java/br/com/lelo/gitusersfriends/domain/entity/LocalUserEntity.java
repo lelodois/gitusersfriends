@@ -1,5 +1,7 @@
 package br.com.lelo.gitusersfriends.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class GitUserEntity implements Serializable {
+public class LocalUserEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -20,13 +22,14 @@ public class GitUserEntity implements Serializable {
     private String login;
 
     @NotNull
+    @JsonFormat(pattern = "dd/mm/yyyy hh:mm:ss")
     private Date lastUpdated;
 
-    public GitUserEntity() {
+    public LocalUserEntity() {
 
     }
 
-    public GitUserEntity(String login) {
+    public LocalUserEntity(String login) {
         this.login = login;
         this.lastUpdated = new Date();
     }

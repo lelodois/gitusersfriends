@@ -1,11 +1,13 @@
 package br.com.lelo.gitusersfriends.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-public class GitUserFriendEntity implements Serializable {
+public class LocalUserFriendEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -14,7 +16,8 @@ public class GitUserFriendEntity implements Serializable {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
-    private GitUserEntity user;
+    @JsonIgnore
+    private LocalUserEntity user;
 
     @NotNull
     private String friendLogin;
@@ -24,6 +27,16 @@ public class GitUserFriendEntity implements Serializable {
 
     private boolean friendFollower;
 
+    public LocalUserFriendEntity() {
+    }
+
+    public LocalUserFriendEntity(String friendLogin, LocalUserEntity user, boolean friendFollower) {
+        this.user = user;
+        this.friendLogin = friendLogin;
+        this.friendFollower = friendFollower;
+        this.friendRepoStars = 0;
+    }
+
     public Long getUserFriendId() {
         return userFriendId;
     }
@@ -32,11 +45,11 @@ public class GitUserFriendEntity implements Serializable {
         this.userFriendId = userFriendId;
     }
 
-    public GitUserEntity getUser() {
+    public LocalUserEntity getUser() {
         return user;
     }
 
-    public void setUser(GitUserEntity user) {
+    public void setUser(LocalUserEntity user) {
         this.user = user;
     }
 

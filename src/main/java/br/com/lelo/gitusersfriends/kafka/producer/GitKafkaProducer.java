@@ -1,8 +1,8 @@
 package br.com.lelo.gitusersfriends.kafka.producer;
 
-import br.com.lelo.gitusersfriends.kafka.comum.KafkaTopicEnum;
-import br.com.lelo.gitusersfriends.domain.entity.GitUserEntity;
+import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
 import br.com.lelo.gitusersfriends.kafka.comum.KafkaProperties;
+import br.com.lelo.gitusersfriends.kafka.comum.KafkaTopicEnum;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class GitKafkaProducer {
         producer = properties.createProducer();
     }
 
-    public void send(GitUserEntity message, KafkaTopicEnum[] topics) {
+    public void send(LocalUserEntity message, KafkaTopicEnum[] topics) {
         for (KafkaTopicEnum topicName : topics) {
             producer.send(
                     new ProducerRecord<String, String>(
@@ -27,5 +27,13 @@ public class GitKafkaProducer {
                             message.getLogin())
             );
         }
+    }
+
+    public void sendError(String login) {
+        this.send(
+                new LocalUserEntity(login),
+                new KafkaTopicEnum[]{KafkaTopicEnum.GIT_TOPIC_ERRORS}
+        );
+
     }
 }
