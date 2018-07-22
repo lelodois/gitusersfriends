@@ -8,12 +8,12 @@ import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
-public class LocalUserFriendEntity implements Serializable {
+public class LocalFriendEntity implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "id_user_friend")
-    private Long userFriendId;
+    @Column(name = "id_friend")
+    private Long friendId;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
@@ -28,25 +28,40 @@ public class LocalUserFriendEntity implements Serializable {
 
     private boolean friendFollower;
 
-    public LocalUserFriendEntity() {
+    @Transient
+    private Integer starts;
+
+    public LocalFriendEntity() {
     }
 
-    public LocalUserFriendEntity(String friendLogin,
-                                 LocalUserEntity user,
-                                 boolean friendFollower,
-                                 int friendRepoStar) {
+    public LocalFriendEntity(String friendLogin,
+                             LocalUserEntity user,
+                             boolean friendFollower,
+                             int friendRepoStar) {
         this.user = user;
         this.friendLogin = friendLogin;
         this.friendFollower = friendFollower;
         this.friendRepoStars = new AtomicInteger(friendRepoStar);
     }
 
-    public Long getUserFriendId() {
-        return userFriendId;
+    public int getStars() {
+        return getFriendRepoStars().get();
     }
 
-    public void setUserFriendId(Long userFriendId) {
-        this.userFriendId = userFriendId;
+    public Long getFriendId() {
+        return friendId;
+    }
+
+    public Integer getStarts() {
+        return starts;
+    }
+
+    public void setStarts(Integer starts) {
+        this.starts = starts;
+    }
+
+    public void setFriendId(Long friendId) {
+        this.friendId = friendId;
     }
 
     public LocalUserEntity getUser() {
@@ -81,7 +96,12 @@ public class LocalUserFriendEntity implements Serializable {
         this.friendFollower = friendFollower;
     }
 
-    public LocalUserFriendEntity increaseStar() {
+    public LocalFriendEntity copyStars() {
+        this.setStarts(this.getFriendRepoStars().get());
+        return this;
+    }
+
+    public LocalFriendEntity increaseStar() {
         this.friendRepoStars.incrementAndGet();
         return this;
     }

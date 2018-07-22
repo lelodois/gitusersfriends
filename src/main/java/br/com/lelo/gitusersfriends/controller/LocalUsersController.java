@@ -2,16 +2,16 @@ package br.com.lelo.gitusersfriends.controller;
 
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
 import br.com.lelo.gitusersfriends.service.LocalUserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("gitfriends/local/users")
-public class LocalUserController {
+@Api(value = "Usuários locais", description = "Usuários extraídos do git")
+@CrossOrigin(value = "*")
+public class LocalUsersController {
 
     @Autowired
     private LocalUserService service;

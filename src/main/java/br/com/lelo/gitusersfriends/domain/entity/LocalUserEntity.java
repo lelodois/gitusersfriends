@@ -1,14 +1,13 @@
 package br.com.lelo.gitusersfriends.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.assertj.core.util.Lists;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class LocalUserEntity implements Serializable {
@@ -22,16 +21,28 @@ public class LocalUserEntity implements Serializable {
     private String login;
 
     @NotNull
-    @JsonFormat(pattern = "dd/mm/yyyy hh:mm:ss")
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private Date lastUpdated;
+
+    @OneToMany(orphanRemoval = true, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<LocalFriendEntity> friends = Lists.newArrayList();
 
     public LocalUserEntity() {
 
     }
 
+
     public LocalUserEntity(String login) {
         this.login = login;
         this.lastUpdated = new Date();
+    }
+
+    public List<LocalFriendEntity> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<LocalFriendEntity> friends) {
+        this.friends = friends;
     }
 
     public Long getId() {

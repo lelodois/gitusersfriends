@@ -1,6 +1,6 @@
 package br.com.lelo.gitusersfriends.domain.dao;
 
-import br.com.lelo.gitusersfriends.domain.entity.LocalUserFriendEntity;
+import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -10,20 +10,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface LocalUserFriendRepository
-        extends CrudRepository<LocalUserFriendEntity, Long> {
+public interface LocalFriendRepository
+        extends CrudRepository<LocalFriendEntity, Long> {
 
-    @Query(" From LocalUserFriendEntity " +
+    @Query(" From LocalFriendEntity " +
             "where friendLogin = :friendLogin " +
             "  and user.login = :userLogin")
-    Optional<LocalUserFriendEntity> findByFriendLoginAndUserLogin(
+    Optional<LocalFriendEntity> findByFriendLoginAndUserLogin(
             @Param("friendLogin") String friendLogin,
             @Param("userLogin") String userLogin
     );
 
 
-    @Query("From LocalUserFriendEntity where user.login = :userLogin")
-    List<LocalUserFriendEntity> findByUserLogin(
+    @Query("From LocalFriendEntity where user.login = :userLogin")
+    List<LocalFriendEntity> findByUserLogin(
             @Param("userLogin") String userLogin
     );
 }

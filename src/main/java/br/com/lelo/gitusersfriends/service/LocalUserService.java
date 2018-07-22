@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Date;
 
 @Service
 public class LocalUserService {
 
     @Autowired
-    private LocalUserRepository gitUserRepository;
+    private LocalUserRepository userRepository;
 
     @Autowired
     private GitKafkaProducer producer;
@@ -26,14 +27,17 @@ public class LocalUserService {
 
     public LocalUserEntity save(String login) {
         try {
-            return this.findByLogin(login);
+            LocalUserEntity user = this.findByLogin(login);
+            user.setLastUpdated(new Date());
+            user.getFriends().clear();
+            return userRepository.save(user);
         } catch (EntityNotFoundException e) {
-            return gitUserRepository.save(new LocalUserEntity(login));
+            return userRepository.save(new LocalUserEntity(login));
         }
     }
 
     public LocalUserEntity findByLogin(String login) throws EntityNotFoundException {
-        return gitUserRepository
+        return userRepository
                 .findByLogin(login)
                 .orElseThrow(() -> new EntityNotFoundException(login));
     }

@@ -2,7 +2,7 @@ package br.com.lelo.gitusersfriends.business;
 
 import br.com.lelo.gitusersfriends.domain.dto.GitRepoDto;
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
-import br.com.lelo.gitusersfriends.service.LocalUserFriendService;
+import br.com.lelo.gitusersfriends.service.LocalFriendService;
 import br.com.lelo.gitusersfriends.service.LocalUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class GitRepoBusiness {
     private LocalUserService userService;
 
     @Autowired
-    private LocalUserFriendService friendService;
+    private LocalFriendService friendService;
 
     public void saveStars(String login) throws Exception {
         LocalUserEntity user = userService.findByLogin(login);
