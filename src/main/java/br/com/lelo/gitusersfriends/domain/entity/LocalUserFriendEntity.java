@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class LocalUserFriendEntity implements Serializable {
@@ -23,18 +24,21 @@ public class LocalUserFriendEntity implements Serializable {
     private String friendLogin;
 
     @NotNull
-    private Integer friendRepoStars;
+    private AtomicInteger friendRepoStars;
 
     private boolean friendFollower;
 
     public LocalUserFriendEntity() {
     }
 
-    public LocalUserFriendEntity(String friendLogin, LocalUserEntity user, boolean friendFollower) {
+    public LocalUserFriendEntity(String friendLogin,
+                                 LocalUserEntity user,
+                                 boolean friendFollower,
+                                 int friendRepoStar) {
         this.user = user;
         this.friendLogin = friendLogin;
         this.friendFollower = friendFollower;
-        this.friendRepoStars = 0;
+        this.friendRepoStars = new AtomicInteger(friendRepoStar);
     }
 
     public Long getUserFriendId() {
@@ -61,11 +65,11 @@ public class LocalUserFriendEntity implements Serializable {
         this.friendLogin = friendLogin;
     }
 
-    public Integer getFriendRepoStars() {
+    public AtomicInteger getFriendRepoStars() {
         return friendRepoStars;
     }
 
-    public void setFriendRepoStars(Integer friendRepoStars) {
+    public void setFriendRepoStars(AtomicInteger friendRepoStars) {
         this.friendRepoStars = friendRepoStars;
     }
 
@@ -75,5 +79,10 @@ public class LocalUserFriendEntity implements Serializable {
 
     public void setFriendFollower(boolean friendFollower) {
         this.friendFollower = friendFollower;
+    }
+
+    public LocalUserFriendEntity increaseStar() {
+        this.friendRepoStars.incrementAndGet();
+        return this;
     }
 }

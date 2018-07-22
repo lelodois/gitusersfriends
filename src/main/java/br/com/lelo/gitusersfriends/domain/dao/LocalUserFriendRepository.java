@@ -13,17 +13,16 @@ import java.util.Optional;
 public interface LocalUserFriendRepository
         extends CrudRepository<LocalUserFriendEntity, Long> {
 
-    @Query("  From LocalUserFriendEntity " +
-            "where friendLogin = :login " +
+    @Query(" From LocalUserFriendEntity " +
+            "where friendLogin = :friendLogin " +
             "  and user.login = :userLogin")
-    Optional<LocalUserFriendEntity> findByLoginAndUserLogin(
-            @Param("login") String login,
+    Optional<LocalUserFriendEntity> findByFriendLoginAndUserLogin(
+            @Param("friendLogin") String friendLogin,
             @Param("userLogin") String userLogin
     );
 
 
-    @Query("  From LocalUserFriendEntity " +
-            "where user.login = :userLogin")
+    @Query("From LocalUserFriendEntity where user.login = :userLogin")
     List<LocalUserFriendEntity> findByUserLogin(
             @Param("userLogin") String userLogin
     );

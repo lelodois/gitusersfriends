@@ -1,14 +1,16 @@
-package br.com.lelo.gitusersfriends.service;
+package br.com.lelo.gitusersfriends.business;
 
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
+import br.com.lelo.gitusersfriends.service.LocalUserFriendService;
+import br.com.lelo.gitusersfriends.service.LocalUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GitFollowersService {
+public class GitFollowerBusiness {
 
     @Autowired
-    private GitHttpService gitHttpService;
+    private GitHttpBusiness gitHttpService;
 
     @Autowired
     private LocalUserService userService;
@@ -22,7 +24,7 @@ public class GitFollowersService {
                 .findFollowers(login)
                 .parallelStream()
                 .filter(friend -> friend.isUser())
-                .forEach(friend -> friendService.saveFriend(friend.getLogin(), user));
+                .forEach(friend -> friendService.save(friend.getLogin(), user));
     }
 
 }

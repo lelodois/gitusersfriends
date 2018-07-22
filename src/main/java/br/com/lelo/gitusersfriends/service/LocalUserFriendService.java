@@ -17,27 +17,44 @@ public class LocalUserFriendService {
 
     public List<LocalUserFriendEntity> findByUserLogin(String userLogin) {
         return repository.findByUserLogin(userLogin);
-
     }
 
-    public void saveFriend(String login, LocalUserEntity user) {
+    public void saveWithStar(String loginFriend, LocalUserEntity user) {
         try {
-
-            LocalUserFriendEntity friendEntity = this.findByLogin(login, user.getLogin());
-            if (friendEntity.isFriendFollower() == false) {
-                friendEntity.setFriendFollower(true);
-                repository.save(friendEntity);
-            }
-
+            repository.save(
+                    this.findBy(loginFriend, user).increaseStar()
+            );
         } catch (EntityNotFoundException e) {
-            repository.save(new LocalUserFriendEntity(login, user, true));
+            repository.save(
+                    new LocalUserFriendEntity(loginFriend, user, true, 1)
+            );
         }
     }
 
-    public LocalUserFriendEntity findByLogin(String login, String userLogin) throws EntityNotFoundException {
+    public void save(String friendLogin, LocalUserEntity user) {
+        try {
+
+            LocalUserFriendEntity savedFriend = this.findBy(friendLogin, user);
+
+            if (!savedFriend.isFriendFollower()) {
+                savedFriend.setFriendFollower(true);
+                repository.save(savedFriend);
+            }
+
+        } catch (EntityNotFoundException e) {
+            repository.save(
+                    new LocalUserFriendEntity(friendLogin, user, true, 0)
+            );
+        }
+    }
+
+    public LocalUserFriendEntity findBy(
+            String friendLogin, LocalUserEntity user)
+            throws EntityNotFoundException {
+
         return repository
-                .findByLoginAndUserLogin(login, userLogin)
-                .orElseThrow(() -> new EntityNotFoundException(login));
+                .findByFriendLoginAndUserLogin(friendLogin, user.getLogin())
+                .orElseThrow(() -> new EntityNotFoundException(friendLogin));
     }
 
 }

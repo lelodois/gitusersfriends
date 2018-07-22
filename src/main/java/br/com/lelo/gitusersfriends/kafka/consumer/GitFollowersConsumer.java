@@ -1,7 +1,7 @@
 package br.com.lelo.gitusersfriends.kafka.consumer;
 
 import br.com.lelo.gitusersfriends.kafka.comum.KafkaTopicEnum;
-import br.com.lelo.gitusersfriends.service.GitFollowersService;
+import br.com.lelo.gitusersfriends.business.GitFollowerBusiness;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 public class GitFollowersConsumer extends GitConsumer {
 
     @Autowired
-    private GitFollowersService followersService;
+    private GitFollowerBusiness followersBusiness;
 
     @Override
     protected void doConsumer(ConsumerRecord<String, String> record)
             throws Exception {
-        followersService.saveFollowers(record.value());
+        followersBusiness.saveFollowers(record.value());
     }
 
     @Override

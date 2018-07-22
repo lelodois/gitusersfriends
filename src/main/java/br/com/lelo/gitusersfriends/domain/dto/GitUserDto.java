@@ -1,4 +1,4 @@
-package br.com.lelo.gitusersfriends.dto;
+package br.com.lelo.gitusersfriends.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

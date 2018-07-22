@@ -19,12 +19,12 @@ public class LocalUserService {
     private GitKafkaProducer producer;
 
     public LocalUserEntity discovery(String login) {
-        LocalUserEntity savedUser = this.saveUser(login);
+        LocalUserEntity savedUser = this.save(login);
         producer.send(savedUser, KafkaTopicEnum.values());
         return savedUser;
     }
 
-    public LocalUserEntity saveUser(String login) {
+    public LocalUserEntity save(String login) {
         try {
             return this.findByLogin(login);
         } catch (EntityNotFoundException e) {
