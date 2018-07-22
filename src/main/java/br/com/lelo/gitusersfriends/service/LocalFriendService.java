@@ -58,7 +58,6 @@ public class LocalFriendService {
 
         friends.sort(comparingInt(LocalFriendEntity::getStars).reversed());
         friends.parallelStream()
-                .filter(friend -> friend.getFriendRepoStars().get() > 0)
                 .map(friend -> friend.copyStars());
 
         return friends.size() > 4 ? friends.subList(0, 4) : friends;

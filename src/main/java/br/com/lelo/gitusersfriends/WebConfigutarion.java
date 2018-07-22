@@ -24,6 +24,9 @@ public class WebConfigutarion extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("**/swagger-resources/**").addResourceLocations("classpath:/META-INF/resources/");
+
+
     }
 
     @Bean
