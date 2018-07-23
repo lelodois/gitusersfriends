@@ -1,6 +1,7 @@
 ## Git users friends
 
-Projeto que descobre os top 5 amigos de um usuário no git
+- Projeto que descobre os top 5 amigos de um usuário no git.
+- Com base nos usuários que favoritaram ou seguidores.
 
 ### Prerequisites
 
