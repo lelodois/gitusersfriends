@@ -35,8 +35,7 @@ Execute os scripts do arquivo abaixo
 ##### Start da aplicação
 
 ```
-  mvn install
-  java -jar target/gitusersfriends-1.0.0.jar
+  mvn install && java -jar target/gitusersfriends-1.0.0.jar
   Acesse http://localhost:9090/swagger-ui.html#/
 ```
 
