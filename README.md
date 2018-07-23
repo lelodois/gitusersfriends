@@ -24,6 +24,10 @@
 ```
 -  docker ps Localize o {container-id}
  - docker exec -it {container-id} bash
+```
+
+Execute os scripts do arquivo abaixo
+```
  - https://github.com/lelodois/gitusersfriends/blob/master/create-topics.sh
 ```
 
