@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface LocalUserRepository
         extends CrudRepository<LocalUserEntity, Long> {
 
-    Optional<LocalUserEntity> findByLogin(String login);
+    Optional<LocalUserEntity> findTop1ByLogin(String login);
 }

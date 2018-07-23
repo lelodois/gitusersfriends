@@ -42,7 +42,7 @@ public class LocalUserBusiness {
 
     public LocalUserEntity findByLogin(String login) throws EntityNotFoundException {
         return userRepository
-                .findByLogin(login)
+                .findTop1ByLogin(login)
                 .orElseThrow(() -> new EntityNotFoundException(login));
     }
 

@@ -35,7 +35,7 @@ public class LocalUserBusinessTest {
         Mockito.when(userRepository.save(Mockito.any(LocalUserEntity.class)))
                 .thenReturn(entity);
 
-        Mockito.when(userRepository.findByLogin(Mockito.anyString()))
+        Mockito.when(userRepository.findTop1ByLogin(Mockito.anyString()))
                 .thenReturn(Optional.empty());
 
         LocalUserEntity saved = business.save(login);
@@ -52,7 +52,7 @@ public class LocalUserBusinessTest {
                 .withLogin(login)
                 .withId(1000l)
                 .build();
-        
+
         entity.setFriends(Lists.newArrayList(
                 LocalFriendBuilder.builder()
                         .withFriendLogin("friend")
@@ -62,7 +62,7 @@ public class LocalUserBusinessTest {
                         .build()
         ));
 
-        Mockito.when(userRepository.findByLogin(Mockito.anyString()))
+        Mockito.when(userRepository.findTop1ByLogin(Mockito.anyString()))
                 .thenReturn(Optional.of(entity));
 
         Mockito.when(userRepository.save(Mockito.any(LocalUserEntity.class)))
