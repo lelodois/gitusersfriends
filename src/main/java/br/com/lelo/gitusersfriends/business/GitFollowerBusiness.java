@@ -8,21 +8,21 @@ import org.springframework.stereotype.Service;
 public class GitFollowerBusiness {
 
     @Autowired
-    private GitHttpBusiness gitHttpService;
+    private GitHttpBusiness gitHttpBusiness;
 
     @Autowired
     private LocalUserBusiness userService;
 
     @Autowired
-    private LocalFriendBusiness friendService;
+    private LocalFriendBusiness friendBusiness;
 
     public void saveFollowers(String login) throws Exception {
         LocalUserEntity user = userService.findByLogin(login);
-        gitHttpService
+        gitHttpBusiness
                 .findFollowers(login)
                 .parallelStream()
                 .filter(friend -> friend.isUser())
-                .forEach(friend -> friendService.save(friend.getLogin(), user));
+                .forEach(friend -> friendBusiness.save(friend.getLogin(), user));
     }
 
 }

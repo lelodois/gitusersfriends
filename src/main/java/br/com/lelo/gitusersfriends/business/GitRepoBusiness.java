@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 public class GitRepoBusiness {
 
     @Autowired
-    private GitHttpBusiness gitHttpService;
+    private GitHttpBusiness gitHttpBusiness;
 
     @Autowired
-    private LocalUserBusiness userService;
+    private LocalUserBusiness userBusiness;
 
     @Autowired
-    private LocalFriendBusiness friendService;
+    private LocalFriendBusiness friendBusiness;
 
     public void saveStars(String login) throws Exception {
-        LocalUserEntity user = userService.findByLogin(login);
-        gitHttpService
+        LocalUserEntity user = userBusiness.findByLogin(login);
+        gitHttpBusiness
                 .findRepo(login)
                 .parallelStream()
                 .filter(GitRepoDto::validRepo)
@@ -28,11 +28,11 @@ public class GitRepoBusiness {
 
     private void saveWithStar(LocalUserEntity user, GitRepoDto repo) {
         try {
-            gitHttpService.findRepoStar(user.getLogin(), repo.getName())
+            gitHttpBusiness.findRepoStar(user.getLogin(), repo.getName())
                     .parallelStream()
                     .filter(star -> !star.getLogin().equals(user.getLogin()))
                     .forEach(star ->
-                            friendService.saveWithStar(star.getLogin(), user)
+                            friendBusiness.saveWithStar(star.getLogin(), user)
                     );
         } catch (Exception e) {
             throw new RuntimeException(e);
