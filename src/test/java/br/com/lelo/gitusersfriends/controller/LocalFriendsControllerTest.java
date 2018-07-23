@@ -1,6 +1,6 @@
 package br.com.lelo.gitusersfriends.controller;
 
-import br.com.lelo.gitusersfriends.service.LocalFriendService;
+import br.com.lelo.gitusersfriends.business.LocalFriendBusiness;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class LocalFriendsControllerTest {
 
     @MockBean
-    private LocalFriendService service;
+    private LocalFriendBusiness service;
 
     @Autowired
     private MockMvc mockMvc;

@@ -1,4 +1,4 @@
-package br.com.lelo.gitusersfriends.service;
+package br.com.lelo.gitusersfriends.business;
 
 import br.com.lelo.gitusersfriends.domain.dao.LocalFriendRepository;
 import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 import static java.util.Comparator.comparingInt;
 
 @Service
-public class LocalFriendService {
+public class LocalFriendBusiness {
 
     @Autowired
     private LocalFriendRepository repository;

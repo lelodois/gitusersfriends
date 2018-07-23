@@ -1,4 +1,4 @@
-package br.com.lelo.gitusersfriends.service;
+package br.com.lelo.gitusersfriends.business;
 
 import br.com.lelo.gitusersfriends.domain.dao.LocalUserRepository;
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
@@ -11,7 +11,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Date;
 
 @Service
-public class LocalUserService {
+public class LocalUserBusiness {
 
     @Autowired
     private LocalUserRepository userRepository;

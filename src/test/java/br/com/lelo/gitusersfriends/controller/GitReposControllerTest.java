@@ -1,6 +1,6 @@
 package br.com.lelo.gitusersfriends.controller;
 
-import br.com.lelo.gitusersfriends.service.LocalUserService;
+import br.com.lelo.gitusersfriends.business.LocalUserBusiness;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GitReposControllerTest {
 
     @Mock
-    private LocalUserService service;
+    private LocalUserBusiness service;
 
     @InjectMocks
     private GitReposController controller;

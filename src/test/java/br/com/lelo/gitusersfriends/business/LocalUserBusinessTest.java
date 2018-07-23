@@ -1,4 +1,4 @@
-package br.com.lelo.gitusersfriends.service;
+package br.com.lelo.gitusersfriends.business;
 
 import br.com.lelo.gitusersfriends.domain.dao.LocalUserRepository;
 import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
@@ -15,13 +15,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LocalUserServiceTest {
+public class LocalUserBusinessTest {
 
     @Mock
     private LocalUserRepository userRepository;
 
     @InjectMocks
-    private LocalUserService service;
+    private LocalUserBusiness business;
 
     @Test
     public void saveSuccess() {
@@ -35,7 +35,7 @@ public class LocalUserServiceTest {
         Mockito.when(userRepository.findByLogin(Mockito.anyString()))
                 .thenReturn(Optional.empty());
 
-        LocalUserEntity saved = service.save(login);
+        LocalUserEntity saved = business.save(login);
 
         Assert.assertEquals(saved.getLogin(), login);
         Assert.assertNotNull(saved.getId());
@@ -57,7 +57,7 @@ public class LocalUserServiceTest {
         Mockito.when(userRepository.save(Mockito.any(LocalUserEntity.class)))
                 .thenReturn(entity);
 
-        LocalUserEntity saved = service.save(login);
+        LocalUserEntity saved = business.save(login);
 
         Assert.assertEquals(saved.getLogin(), login);
         Assert.assertNotNull(saved.getId());

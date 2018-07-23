@@ -2,8 +2,6 @@ package br.com.lelo.gitusersfriends.business;
 
 import br.com.lelo.gitusersfriends.domain.dto.GitUserDto;
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
-import br.com.lelo.gitusersfriends.service.LocalFriendService;
-import br.com.lelo.gitusersfriends.service.LocalUserService;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,10 +17,10 @@ public class GitFollowerBusinessTest {
     private GitHttpBusiness gitHttpService;
 
     @Mock
-    private LocalUserService userService;
+    private LocalUserBusiness userService;
 
     @Mock
-    private LocalFriendService friendService;
+    private LocalFriendBusiness friendService;
 
     @InjectMocks
     private GitFollowerBusiness gitFollowerBusiness;

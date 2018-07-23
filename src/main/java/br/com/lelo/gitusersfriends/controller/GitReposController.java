@@ -1,7 +1,7 @@
 package br.com.lelo.gitusersfriends.controller;
 
 import br.com.lelo.gitusersfriends.domain.dto.GitUserDto;
-import br.com.lelo.gitusersfriends.service.LocalUserService;
+import br.com.lelo.gitusersfriends.business.LocalUserBusiness;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 public class GitReposController {
 
     @Autowired
-    private LocalUserService service;
+    private LocalUserBusiness service;
 
     @PutMapping(value = "friends")
     public ResponseEntity<String> discovery(

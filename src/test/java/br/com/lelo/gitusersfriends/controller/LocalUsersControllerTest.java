@@ -1,7 +1,7 @@
 package br.com.lelo.gitusersfriends.controller;
 
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
-import br.com.lelo.gitusersfriends.service.LocalUserService;
+import br.com.lelo.gitusersfriends.business.LocalUserBusiness;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class LocalUsersControllerTest {
 
     @MockBean
-    private LocalUserService service;
+    private LocalUserBusiness service;
 
     @Autowired
     private MockMvc mockMvc;

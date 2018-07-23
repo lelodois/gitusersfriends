@@ -1,7 +1,7 @@
 package br.com.lelo.gitusersfriends.controller;
 
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
-import br.com.lelo.gitusersfriends.service.LocalUserService;
+import br.com.lelo.gitusersfriends.business.LocalUserBusiness;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class LocalUsersController {
 
     @Autowired
-    private LocalUserService service;
+    private LocalUserBusiness service;
 
     @GetMapping(value = "/{login}")
     public ResponseEntity<LocalUserEntity> get(

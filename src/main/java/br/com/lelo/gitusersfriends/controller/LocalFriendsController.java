@@ -1,7 +1,7 @@
 package br.com.lelo.gitusersfriends.controller;
 
 import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
-import br.com.lelo.gitusersfriends.service.LocalFriendService;
+import br.com.lelo.gitusersfriends.business.LocalFriendBusiness;
 import io.swagger.annotations.Api;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 public class LocalFriendsController {
 
     @Autowired
-    private LocalFriendService service;
+    private LocalFriendBusiness service;
 
     @GetMapping(value = "/{login}")
     public ResponseEntity<List<LocalFriendEntity>> get(
