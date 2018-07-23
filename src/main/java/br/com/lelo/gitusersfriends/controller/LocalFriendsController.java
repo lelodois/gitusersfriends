@@ -1,7 +1,8 @@
 package br.com.lelo.gitusersfriends.controller;
 
-import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
 import br.com.lelo.gitusersfriends.business.LocalFriendBusiness;
+import br.com.lelo.gitusersfriends.domain.dto.RequestDto;
+import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
 import io.swagger.annotations.Api;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,14 @@ public class LocalFriendsController {
             @PathVariable @NotEmpty String login) {
 
         return ResponseEntity.ok(service.findTopFriends(login));
+    }
+
+    @GetMapping(value = "/ready/{login}")
+    public ResponseEntity<RequestDto> ready(
+            @PathVariable @NotEmpty String login) {
+        return ResponseEntity.ok(
+                new RequestDto(login, !service.findTopFriends(login).isEmpty())
+        );
     }
 
 }

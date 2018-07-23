@@ -32,7 +32,7 @@ public class LocalFriendEntity implements Serializable {
     private Integer starts;
 
     public int getStars() {
-        return getFriendRepoStars().get();
+        return getFriendRepoStars() != null ? getFriendRepoStars().get() : 0;
     }
 
     public Long getFriendId() {

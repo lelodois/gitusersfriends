@@ -1,6 +1,7 @@
 package br.com.lelo.gitusersfriends.controller;
 
 import br.com.lelo.gitusersfriends.business.LocalFriendBusiness;
+import br.com.lelo.gitusersfriends.domain.entity.builder.LocalFriendBuilder;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,9 +28,13 @@ public class LocalFriendsControllerTest {
     private static final String URL = "/gitfriends/local/top-friends/";
 
     @Test
-    public void getSuccess() throws Exception {
+    public void getSuccessItem() throws Exception {
         Mockito.when(service.findTopFriends(Mockito.any(String.class)))
-                .thenReturn(Lists.newArrayList());
+                .thenReturn(Lists.newArrayList(
+                        LocalFriendBuilder.builder()
+                                .withFriendLogin("lelodois")
+                                .build()
+                ));
 
         mockMvc.perform(get(URL.concat("lelodois")))
                 .andExpect(status().isOk());
