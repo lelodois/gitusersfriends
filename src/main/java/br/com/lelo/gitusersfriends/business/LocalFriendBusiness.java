@@ -4,9 +4,8 @@ import br.com.lelo.gitusersfriends.domain.dao.LocalFriendRepository;
 import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
 import br.com.lelo.gitusersfriends.domain.entity.builder.LocalFriendBuilder;
+import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -62,10 +61,9 @@ public class LocalFriendBusiness {
                 .orElseThrow(() -> new EntityNotFoundException(friendLogin));
     }
 
-    @Retryable(maxAttempts = 5, value = RuntimeException.class, backoff = @Backoff(delay = 2000))
     public List<LocalFriendEntity> findTopFriends(String userLogin) {
         List<LocalFriendEntity> friends = repository.findByUserLogin(userLogin);
-        if (friends.isEmpty()) throw new RuntimeException("Friends not loaded");
+        if (friends.isEmpty()) return Lists.newArrayList();
 
         friends.sort(comparingInt(LocalFriendEntity::getStars).reversed());
         friends.parallelStream()
