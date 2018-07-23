@@ -7,7 +7,7 @@
 
 - Java 8 
 - Maven
-- Docker
+- Docker (kafka, zookeper)
 
 ### Instalação
 
@@ -50,6 +50,7 @@ Execute as urls abaixo:
 * Maven
 * Kafka
 * Spring boot
+* Intellij
 
 ## Autor
 
