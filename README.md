@@ -1,6 +1,6 @@
 ## Git users friends
 
-<b>Serviço Rest que retorna Json com os top 5 amigos de um usuário no git.<b>
+<b>Serviço Rest que retorna Json com os top 5 amigos de um usuário no git.</b>
 
 ##### Com base nos usuários que favoritaram ou seguidores.
 
