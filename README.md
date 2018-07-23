@@ -1,7 +1,8 @@
 ## Git users friends
 
-- Projeto que descobre os top 5 amigos de um usuário no git.
-- Com base nos usuários que favoritaram ou seguidores.
+<b>Serviço Rest que retorna Json com os top 5 amigos de um usuário no git.<b>
+
+##### Com base nos usuários que favoritaram ou seguidores.
 
 ### Pré-requisitos
 
@@ -50,7 +51,7 @@ Execute as urls abaixo:
 
 ## Tecnologias
 
-* Java 8
+* Java 8 (rest)
 * Maven
 * Kafka
 * Spring boot
