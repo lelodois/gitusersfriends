@@ -31,19 +31,6 @@ public class LocalFriendEntity implements Serializable {
     @Transient
     private Integer starts;
 
-    public LocalFriendEntity() {
-    }
-
-    public LocalFriendEntity(String friendLogin,
-                             LocalUserEntity user,
-                             boolean friendFollower,
-                             int friendRepoStar) {
-        this.user = user;
-        this.friendLogin = friendLogin;
-        this.friendFollower = friendFollower;
-        this.friendRepoStars = new AtomicInteger(friendRepoStar);
-    }
-
     public int getStars() {
         return getFriendRepoStars().get();
     }

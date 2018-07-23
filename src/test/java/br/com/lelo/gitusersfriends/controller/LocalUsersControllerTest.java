@@ -2,6 +2,7 @@ package br.com.lelo.gitusersfriends.controller;
 
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
 import br.com.lelo.gitusersfriends.business.LocalUserBusiness;
+import br.com.lelo.gitusersfriends.domain.entity.builder.LocalUserBuilder;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +30,7 @@ public class LocalUsersControllerTest {
     @Test
     public void getSuccess() throws Exception {
         Mockito.when(service.findByLogin(Mockito.anyString()))
-                .thenReturn(new LocalUserEntity("lelodois"));
+                .thenReturn(LocalUserBuilder.builder().withLogin("lelodois").build());
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get(URL.concat(" ")))

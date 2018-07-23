@@ -3,6 +3,7 @@ package br.com.lelo.gitusersfriends.business;
 import br.com.lelo.gitusersfriends.domain.dto.GitRepoDto;
 import br.com.lelo.gitusersfriends.domain.dto.GitUserDto;
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
+import br.com.lelo.gitusersfriends.domain.entity.builder.LocalUserBuilder;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +31,10 @@ public class GitRepoBusinessTest {
     public void saveFollowers() throws Exception {
         String login = "lelodois";
         Mockito.when(userService.findByLogin(login))
-                .thenReturn(new LocalUserEntity(login));
+                .thenReturn(
+                        LocalUserBuilder.builder()
+                                .withLogin(login)
+                                .build());
 
         Mockito.when(gitHttpService.findRepo(login))
                 .thenReturn(Lists.newArrayList(

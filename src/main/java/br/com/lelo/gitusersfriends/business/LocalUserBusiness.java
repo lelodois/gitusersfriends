@@ -2,6 +2,7 @@ package br.com.lelo.gitusersfriends.business;
 
 import br.com.lelo.gitusersfriends.domain.dao.LocalUserRepository;
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
+import br.com.lelo.gitusersfriends.domain.entity.builder.LocalUserBuilder;
 import br.com.lelo.gitusersfriends.kafka.comum.KafkaTopicEnum;
 import br.com.lelo.gitusersfriends.kafka.producer.GitKafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,10 @@ public class LocalUserBusiness {
             user.getFriends().clear();
             return userRepository.save(user);
         } catch (EntityNotFoundException e) {
-            return userRepository.save(new LocalUserEntity(login));
+            return userRepository.save(
+                    LocalUserBuilder.builder()
+                            .withLogin(login)
+                            .build());
         }
     }
 

@@ -27,16 +27,6 @@ public class LocalUserEntity implements Serializable {
     @OneToMany(orphanRemoval = true, mappedBy = "user", cascade = CascadeType.ALL)
     private List<LocalFriendEntity> friends = Lists.newArrayList();
 
-    public LocalUserEntity() {
-
-    }
-
-
-    public LocalUserEntity(String login) {
-        this.login = login;
-        this.lastUpdated = new Date();
-    }
-
     public List<LocalFriendEntity> getFriends() {
         return friends;
     }

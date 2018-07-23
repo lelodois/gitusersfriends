@@ -1,6 +1,7 @@
 package br.com.lelo.gitusersfriends.kafka.producer;
 
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
+import br.com.lelo.gitusersfriends.domain.entity.builder.LocalUserBuilder;
 import br.com.lelo.gitusersfriends.kafka.comum.KafkaProperties;
 import br.com.lelo.gitusersfriends.kafka.comum.KafkaTopicEnum;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -31,7 +32,7 @@ public class GitKafkaProducer {
 
     public void sendError(String login) {
         this.send(
-                new LocalUserEntity(login),
+                LocalUserBuilder.builder().withLogin(login).build(),
                 new KafkaTopicEnum[]{KafkaTopicEnum.GIT_TPC_ERRORS}
         );
 

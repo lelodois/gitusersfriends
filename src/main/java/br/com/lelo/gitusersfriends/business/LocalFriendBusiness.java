@@ -3,6 +3,7 @@ package br.com.lelo.gitusersfriends.business;
 import br.com.lelo.gitusersfriends.domain.dao.LocalFriendRepository;
 import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
+import br.com.lelo.gitusersfriends.domain.entity.builder.LocalFriendBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
@@ -19,11 +20,16 @@ public class LocalFriendBusiness {
     @Autowired
     private LocalFriendRepository repository;
 
-    public void saveWithStar(String loginFriend, LocalUserEntity user) {
+    public void saveWithStar(String friendLogin, LocalUserEntity user) {
         try {
-            repository.save(this.findBy(loginFriend, user).increaseStar());
+            repository.save(this.findBy(friendLogin, user).increaseStar());
         } catch (EntityNotFoundException e) {
-            repository.save(new LocalFriendEntity(loginFriend, user, true, 1));
+            repository.save(LocalFriendBuilder.builder()
+                    .withFriendLogin(friendLogin)
+                    .withUser(user)
+                    .withFriendFollower(true)
+                    .withFriendRepoStar(1)
+                    .build());
         }
     }
 
@@ -38,7 +44,12 @@ public class LocalFriendBusiness {
             }
 
         } catch (EntityNotFoundException e) {
-            repository.save(new LocalFriendEntity(friendLogin, user, true, 0));
+            repository.save(LocalFriendBuilder.builder()
+                    .withFriendLogin(friendLogin)
+                    .withUser(user)
+                    .withFriendFollower(true)
+                    .withFriendRepoStar(1)
+                    .build());
         }
     }
 
@@ -58,7 +69,7 @@ public class LocalFriendBusiness {
 
         friends.sort(comparingInt(LocalFriendEntity::getStars).reversed());
         friends.parallelStream()
-                .map(friend -> friend.copyStars());
+                .map(LocalFriendEntity::copyStars);
 
         return friends.size() > 4 ? friends.subList(0, 4) : friends;
     }

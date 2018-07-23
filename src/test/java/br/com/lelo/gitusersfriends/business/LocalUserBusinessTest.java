@@ -1,8 +1,9 @@
 package br.com.lelo.gitusersfriends.business;
 
 import br.com.lelo.gitusersfriends.domain.dao.LocalUserRepository;
-import br.com.lelo.gitusersfriends.domain.entity.LocalFriendEntity;
 import br.com.lelo.gitusersfriends.domain.entity.LocalUserEntity;
+import br.com.lelo.gitusersfriends.domain.entity.builder.LocalFriendBuilder;
+import br.com.lelo.gitusersfriends.domain.entity.builder.LocalUserBuilder;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,8 +27,10 @@ public class LocalUserBusinessTest {
     @Test
     public void saveSuccess() {
         String login = "lelodois";
-        LocalUserEntity entity = new LocalUserEntity(login);
-        entity.setId(1000l);
+        LocalUserEntity entity = LocalUserBuilder.builder()
+                .withLogin(login)
+                .withId(1000l)
+                .build();
 
         Mockito.when(userRepository.save(Mockito.any(LocalUserEntity.class)))
                 .thenReturn(entity);
@@ -45,10 +48,18 @@ public class LocalUserBusinessTest {
     @Test
     public void updateSuccess() {
         String login = "lelodois";
-        LocalUserEntity entity = new LocalUserEntity(login);
-        entity.setId(1000l);
+        LocalUserEntity entity = LocalUserBuilder.builder()
+                .withLogin(login)
+                .withId(1000l)
+                .build();
+        
         entity.setFriends(Lists.newArrayList(
-                new LocalFriendEntity("friend", entity, false, 1)
+                LocalFriendBuilder.builder()
+                        .withFriendLogin("friend")
+                        .withUser(entity)
+                        .withFriendFollower(false)
+                        .withFriendRepoStar(1)
+                        .build()
         ));
 
         Mockito.when(userRepository.findByLogin(Mockito.anyString()))
