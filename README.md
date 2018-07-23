@@ -2,6 +2,8 @@
 
 ##### Com base nos usuários que favoritaram ou seguidores.
 
+![Fluxo](https://github.com/lelodois/gitusersfriends/blob/master/back-fluxo.png)
+
 ### Pré-requisitos
 
 - Java 8 
