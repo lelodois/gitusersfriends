@@ -17,35 +17,35 @@
 ##### Instalação do kafka-zookeper no docker
 
 ```
- - docker run -p 2181:2181 -p 9092:9092 -e ADVERTISED_HOST=127.0.0.1  johnnypark/kafka-zookeeper 
+  docker run -p 2181:2181 -p 9092:9092 -e ADVERTISED_HOST=127.0.0.1  johnnypark/kafka-zookeeper 
 ```
 
 ##### Crie os topicos
 Localize o e entre na imagem do docker
 ```
--  docker ps 
- - docker exec -it {container-id} bash
+  docker ps 
+  docker exec -it {container-id} bash
 ```
 
 Execute os scripts do arquivo abaixo
 ```
- - https://github.com/lelodois/gitusersfriends/blob/master/create-topics.sh
+  https://github.com/lelodois/gitusersfriends/blob/master/create-topics.sh
 ```
 
 ##### Start da aplicação
 
 ```
- - mvn install
- - java -jar target/gitusersfriends-1.0.0.jar
- - Acesse http://localhost:9090/swagger-ui.html#/
+  mvn install
+  java -jar target/gitusersfriends-1.0.0.jar
+  Acesse http://localhost:9090/swagger-ui.html#/
 ```
 
 Execute as urls abaixo:
 
 ```
- - http://localhost:9090/gitfriends/git/friends/ {gitLogin}
- - http://localhost:9090/gitfriends/local/users/ {gitLogin}
- - http://localhost:9090/gitfriends/local/top-friends/ {gitLogin}
+  http://localhost:9090/gitfriends/git/friends/ {gitLogin}
+  http://localhost:9090/gitfriends/local/users/ {gitLogin}
+  http://localhost:9090/gitfriends/local/top-friends/ {gitLogin}
 ```
 
 
