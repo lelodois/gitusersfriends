@@ -14,7 +14,7 @@ public class GitRepoConsumer extends GitConsumer {
 
     @Override
     public KafkaTopicEnum getTopic() {
-        return KafkaTopicEnum.GIT_TOPIC_REPOSITORY;
+        return KafkaTopicEnum.GIT_TPC_REPOSITORY;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class GitFollowersConsumer extends GitConsumer {
 
     @Override
     public KafkaTopicEnum getTopic() {
-        return KafkaTopicEnum.GIT_TOPIC_FOLLOWERS;
+        return KafkaTopicEnum.GIT_TPC_FOLLOWERS;
     }
 
 }

@@ -1,0 +1,3 @@
+/opt/kafka_2.12-1.1.0/bin/kafka-topics.sh --create --topic GIT_TPC_REPOSITORY -zookeeper localhost:2181 --replication-factor 1 --partitions 1
+/opt/kafka_2.12-1.1.0/bin/kafka-topics.sh --create --topic GIT_TPC_FOLLOWERS -zookeeper localhost:2181 --replication-factor 1 --partitions 1
+/opt/kafka_2.12-1.1.0/bin/kafka-topics.sh --create --topic GIT_TPC_ERRORS -zookeeper localhost:2181 --replication-factor 1 --partitions 1

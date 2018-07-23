@@ -32,7 +32,7 @@ public class GitKafkaProducer {
     public void sendError(String login) {
         this.send(
                 new LocalUserEntity(login),
-                new KafkaTopicEnum[]{KafkaTopicEnum.GIT_TOPIC_ERRORS}
+                new KafkaTopicEnum[]{KafkaTopicEnum.GIT_TPC_ERRORS}
         );
 
     }

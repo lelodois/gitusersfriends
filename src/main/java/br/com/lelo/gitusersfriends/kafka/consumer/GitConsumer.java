@@ -25,7 +25,6 @@ public abstract class GitConsumer {
     public final void go() {
         properties.getProperties().put("group.id", UUID.randomUUID().toString());
         consumer = properties.createConsumer(getTopic().name());
-        consumer.seekToBeginning(consumer.assignment());
     }
 
     @Scheduled(fixedDelay = 2000)
