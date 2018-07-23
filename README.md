@@ -58,4 +58,4 @@ Execute as urls abaixo:
 
 ## Autor
 
-* **Leo costa** - *Initial work* - [PurpleBooth](https://github.com/lelodois/gitusersfriendsh)
+* **Leo costa** - *Initial work* - [GitUsersFriends](https://github.com/lelodois/gitusersfriends)
