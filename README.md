@@ -21,9 +21,9 @@
 ```
 
 ##### Crie os topicos
-
+Localize o e entre na imagem do docker
 ```
--  docker ps Localize o {container-id}
+-  docker ps 
  - docker exec -it {container-id} bash
 ```
 
